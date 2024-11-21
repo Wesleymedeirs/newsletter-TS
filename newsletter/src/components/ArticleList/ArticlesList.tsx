@@ -2,24 +2,24 @@ import Article from "../Article/Article";
 import useFetch from "../Hooks/useFetch";
 
 // Definindo a interface para um artigo
-interface Article {
+interface ArticleProps {
     title: string;
     text: string[];
     tags: string[];
-    imagem: string; 
+    image: string; 
     alt: string;    
 }
 
 const ArticlesList: React.FC = () => {
     // Usando o tipo Article para os dados retornados pelo hook
-    const { data, error, isLoading } = useFetch<Article[]>('https://raw.githubusercontent.com/cardozov/alura-newsletter/aula3/articles.json');
+    const { data, error, isLoading } = useFetch<ArticleProps[]>('https://raw.githubusercontent.com/cardozov/alura-newsletter/aula3/articles.json');
 
     if (isLoading) {
-        return <div>Carregando...</div>;
+        return <div className="flex flex-col items-center bg-gray-100  text-slate-900 p-5 mx-64">Carregando...</div>;
     }
 
     if (error) {
-        return <div>Erro ao carregar os artigos: {error}</div>;
+        return <div className="flex flex-col items-center bg-gray-100  text-red-500 p-5 mx-64">Erro ao carregar os artigos: {error}</div>;
     }
 
     return (
